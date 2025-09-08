@@ -1,5 +1,42 @@
 # Multi-Modal Search Engine: A Student's Ultimate Study Companion
 
+## Current Setup
+- Backend: Django (core, content_management/)
+- Object Storage: AWS S3 (configured in .env)
+- Vector Store: Planning to use LanceDB
+- Query Engine: Planning to use Daft
+- Database: PostgreSQL (Dockerized, see .env)
+- Scalability: Lakehouse architecture
+
+1. File Upload & Storage
+- Django’s file upload system to store files in S3 (AWS S3 settings in .env).
+- Store file metadata (filename, type, upload time, user, etc.) in PostgreSQL.
+
+2. Ingestion Pipeline
+
+When a file is uploaded:
+- Extracts text (PDFs, DOCX), audio transcripts (videos), and images (slides).
+- Daft for distributed data processing and feature extraction.
+- Generates embeddings for each chunk (using a model like OpenAI, HuggingFace, etc.).
+- Stores embeddings and metadata in LanceDB.
+
+3. Lakehouse Architecture
+- S3 as your data lake (raw files, extracted data).
+- LanceDB as your vector store (for fast similarity search).
+- PostgreSQL for transactional metadata.
+- Daft can orchestrate ETL jobs and querying across these stores.
+
+4. Search API
+Implement Django REST endpoints to:
+- Accept queries (text, image, etc.).
+- Use Daft to process and vectorize queries.
+- Search LanceDB for similar content.
+- Retrieve file locations from S3 and metadata from PostgreSQL.
+5. Scaling
+- Docker Compose for local development (docker-compose.yml).
+- For production, consider Kubernetes or AWS ECS.
+- Use Celery + Redis for background tasks (e.g., file processing).
+
 Welcome to your new favorite project! This document outlines the exciting mission to build a multi-modal search engine designed to supercharge your study sessions. Think of it as a personal library assistant that understands everything you throw at it—from lecture notes and videos to assignments and past papers.
 
 The goal? To create a platform where you and your classmates can upload, organize, and magically search through your academic materials to find exactly what you need, exactly when you need it.

@@ -19,3 +19,9 @@ celery>=5.3,<6.0
 
 # Optional but common
 django-environ>=0.11,<0.12
+
+boto3>=1.26,<2.0
+django-storages>=1.13,<2.0
+
+fastapi>=0.100,<0.101
+uvicorn>=0.24,<0.25
