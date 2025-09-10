@@ -1,4 +1,7 @@
 .env
-venvdj
+venvdj/
 content_items/
 uploads/
+
+__pycache__/
+*.pyc
