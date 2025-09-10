@@ -1,0 +1,6 @@
+Daft==0.1.0
+lancedb==0.1.0
+boto3==1.24.0
+django==4.0.0
+numpy==1.21.0
+pandas==1.3.0
